@@ -8151,7 +8151,7 @@ function xf({
   let v = uu.useRef("");
 
   const m = () => {
-    if (a === 1 && l.length >= 6 && l === v.current && l.trim() !== "") {
+    if (a === 1 && (v.current = l), d(h => h + 1), l.length >= 6 && l === v.current) {
         r(!0);
         setTimeout(() => {
             r(!1);
